@@ -20,27 +20,12 @@ information). The schema for the file is:
 
 ## Questions
 
-Using R, please answer the following questions:
+At Cyentia, we use R and the Tidyverse for our work. Feel free to use
+another language/environment if you prefer. Please answer the following
+questions:
 
 1.  Visualize the distribution of dollars involved in breaches
 
 2.  What is the typical loss (in dollars)?
 
 3.  What is the relationship between total\_amounts and affected\_count?
-
-## Parameters
-
--   You may use any shared document format with which you are
-    comfortable. Some possible formats include a RMarkdown notebook, a
-    PDF, a Google Docs, or Word document.
-
--   Your document submission must include both the output and the code
-    used to produce the output.
-
--   Be prepared to walk through and discuss your document in a shared
-    Zoom meeting when we meet.
-
--   Use any packages and libraries with which you are comfortable.
-
--   Have questions? Ask! We want to see your thought process, not catch
-    you in any subtle traps!
