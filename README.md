@@ -20,12 +20,13 @@ information). The schema for the file is:
 
 ## Questions
 
-At Cyentia, we use R and the Tidyverse for our work. Feel free to use
-another language/environment if you prefer. Please answer the following
-questions:
+At Cyentia, we use R and the Tidyverse for our work. Please do not spend more than 1 or 2 hours on this and deliver your output as a static, non-interactive notebook. When appropriate please highlight your data visualization skills. 
 
-1.  Visualize the distribution of dollars involved in breaches
+Overall, we're interested in analysis to support cyber risk management. For example, frequency of events, magnitude of losses per event, trends over time or per sector, anything you think may help an organiations make better decisions around the cyber risk landscape. Include your thoughts on future areas of research, if you had more time to pursue them (again, spending no more than 1-2 hours).
 
-2.  What is the typical loss (in dollars)?
 
-3.  What is the relationship between total\_amounts and affected\_count?
+
+
+
+
+
