@@ -18,11 +18,13 @@ information). The schema for the file is:
 | breach\_date             | Date the breach occurred                           |
 | cause                    | High level summary of the cause of the breach      |
 
-## Questions
+## Instructions
 
 At Cyentia, we use R and the Tidyverse for our work. Please do not spend more than 1 or 2 hours on this and deliver your output as a static, non-interactive notebook. When appropriate please highlight your data visualization skills. 
 
-Overall, we're interested in analysis to support cyber risk management. For example, frequency of events, magnitude of losses per event, trends over time or per sector, anything you think may help an organiations make better decisions around the cyber risk landscape. Include your thoughts on future areas of research, if you had more time to pursue them (again, spending no more than 1-2 hours).
+Overall, we're interested in analysis to support cyber risk management. For example, frequency of events, magnitude of losses per event, trends over time or per sector, anything you think may help an organiations make better decisions around the cyber risk landscape. Include your thoughts on future areas of research, if you had more time to pursue them (again, spending no more than 1-2 hours).  
+
+Please provide us the final notebook to us, preferably as a forked github repository. 
 
 
 
