@@ -1,12 +1,23 @@
 ---
 title: "EDA On Data Breaches"
-output: html_notebook
+author: "Orel Yoshia"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
 ---
 
 ```{r message=FALSE}
 library(tidyverse)
 library(lubridate)
 ```
+
+
+# Introduction
+
+This analysis explores the sample of cyber data breaches data to provide insight into cyber risk management.
+
+# Loading the Data
 
 ```{r}
 # Reading in the data.
@@ -25,6 +36,7 @@ str(breaches)
 
 summary(breaches)
 ```
+# Data Cleaning and Transformation
 
 ```{r}
 # Immediately noticed that the Breach_date column was of type character and not date and knew I wanted to explore the dates a little bit more so converted it to date and then created a new column to just pull the year.
@@ -34,6 +46,7 @@ breaches$year <- year(breaches$breach_date)
 breaches
 ```
 
+# Top Date Frequencies
 
 ```{r}
 # I wanted to see if any specific dates had more breaches than others.
@@ -63,6 +76,7 @@ ggplot(event_frequency, aes(x = breach_date, y = event_count)) +
   theme_minimal()
 ```
 
+# Losses Over Time
 
 ```{r}
 # Next I wanted to look at the total amount of losses over time.
@@ -92,6 +106,8 @@ ggplot(losses_per_event, aes(x = breach_date, y = total_loss)) +
        y = "Total Loss") +
   theme_minimal()
 ```
+
+# Breaches by Sector
 
 ```{r}
 # I wanted to then investigate a little bit about the sectors so this is a general visualization of which sector had the highest count of breaches.
@@ -125,6 +141,8 @@ ggplot(sector_trends, aes(x = sector, y = mean_loss, fill = sector)) +
   theme_minimal()
 ```
 
+# Breaches per Sector and Year
+
 ```{r}
 # Finally, I wanted to create a table with the count of breaches per sector and year and then visualize it in a heat map.
 
@@ -148,8 +166,7 @@ ggplot(heatmap_breaches, aes(x = sector, y = as.factor(year), fill = breach_coun
   theme_minimal()
 ```
 
-
-Some future work:
+# Future Work
 
  - Predictive modeling for cyber breach occurrences.
  - Deep dive into specific sectors to identify common vulnerabilities.
