@@ -1,0 +1,157 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r message=FALSE}
+library(tidyverse)
+library(lubridate)
+```
+
+```{r}
+# Reading in the data.
+
+breaches <- read.csv("sample_breaches.csv")
+```
+
+```{r}
+# Getting some basic information of the data.
+
+str(breaches)
+```
+
+```{r}
+# Quick summary of the data to see if anything looks outstanding at first glance.
+
+summary(breaches)
+```
+
+```{r}
+# Immediately noticed that the Breach_date column was of type character and not date and knew I wanted to explore the dates a little bit more so converted it to date and then created a new column to just pull the year.
+
+breaches$breach_date <-ymd(breaches$breach_date)
+breaches$year <- year(breaches$breach_date)
+breaches
+```
+
+
+```{r}
+# I wanted to see if any specific dates had more breaches than others.
+
+event_frequency <- breaches %>%
+  group_by(breach_date) %>%
+  summarise(event_count = n())
+event_frequency
+```
+
+```{r}
+# Looking at the top 10 dates to see if there is any significance.
+
+event_frequency %>% 
+  top_n(10, wt = event_count) %>% 
+  arrange(desc(event_count))
+```
+
+```{r}
+# Visualizing the Cyber Breach Frequencies over time.
+
+ggplot(event_frequency, aes(x = breach_date, y = event_count)) +
+  geom_bar(stat = "identity", fill = "#478892") +
+  labs(title = "Cyber Breach Frequencies Over Time",
+       x = "Breach Date",
+       y = "Event Count") +
+  theme_minimal()
+```
+
+
+```{r}
+# Next I wanted to look at the total amount of losses over time.
+
+losses_per_event <- breaches %>%
+  group_by(breach_date) %>%
+  summarise(total_loss = sum(total_amount))
+losses_per_event
+```
+
+```{r}
+# Looking at the top 10 total losses.
+
+losses_per_event %>% 
+  top_n(10, wt = total_loss) %>% 
+  arrange(desc(total_loss))
+```
+
+
+```{r}
+# Visualizing the losses over time.
+
+ggplot(losses_per_event, aes(x = breach_date, y = total_loss)) +
+  geom_line() +
+  labs(title = "Total Losses from Cyber Breaches Over Time", 
+       x = "Breach Date", 
+       y = "Total Loss") +
+  theme_minimal()
+```
+
+```{r}
+# I wanted to then investigate a little bit about the sectors so this is a general visualization of which sector had the highest count of breaches.
+
+ggplot(breaches, aes(x = sector)) +
+  geom_bar(fill = "#478892") +
+  labs(title = "Count of Breaches by Sector", 
+       x = "Sector", 
+       y = "Count of Breaches") +
+  coord_flip() +
+  theme_minimal()
+```
+
+```{r}
+# Deep diving a little more into the sector and wanting to look at trends per sector and taking the average loss for each sector.
+
+sector_trends <- breaches %>%
+  group_by(sector) %>%
+  summarise(mean_loss = mean(total_amount))
+```
+
+```{r}
+# Visualizing the Average Losses by Sector.
+
+ggplot(sector_trends, aes(x = sector, y = mean_loss, fill = sector)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  labs(title = "Average Losses by Sector", 
+       x = "Sector", 
+       y = "Mean Loss") +
+  coord_flip() +
+  theme_minimal()
+```
+
+```{r}
+# Finally, I wanted to create a table with the count of breaches per sector and year and then visualize it in a heat map.
+
+heatmap_breaches <- breaches %>%
+  group_by(year, sector) %>%
+  summarise(breach_count = n())
+heatmap_breaches
+```
+
+```{r}
+# Visualizing the previous table with a heat map.
+
+ggplot(heatmap_breaches, aes(x = sector, y = as.factor(year), fill = breach_count)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient(low = "white", high = "#478892") +
+  labs(title = "Cyber Breach Frequency by Sector Over Time",
+       x = "Sector",
+       y = "Year",
+       fill = "Breach Count") +
+  coord_flip() +
+  theme_minimal()
+```
+
+
+Some future work:
+
+ - Predictive modeling for cyber breach occurrences.
+ - Deep dive into specific sectors to identify common vulnerabilities.
+ - Deep dive into what happened on April 10, 2020 and why the loss was so high (looking at sector etc).
+
